@@ -1,0 +1,34 @@
+﻿@page
+@model Deckollector.Pages.Decks.DetailsModel
+
+@{
+    ViewData["Title"] = "Deck Details";
+}
+
+<div class="wrapper">
+    <h1>Deck Details</h1>
+
+    <div>
+        <h4>Deck</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Deck.DeckName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Deck.DeckName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Deck.DeckDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Deck.DeckDescription)
+            </dd>
+        </dl>
+    </div>
+
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Deck?.DeckID" class="custom-link">Edit</a> |
+        <a asp-page="./Index" class="custom-link">Back to List</a>
+    </div>
+</div>

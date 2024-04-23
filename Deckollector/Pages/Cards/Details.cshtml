@@ -1,0 +1,69 @@
+﻿@page
+@model Deckollector.Pages.Cards.DetailsModel
+
+@{
+    ViewData["Title"] = "Card Details";
+}
+
+<div class="wrapper">
+    <h1>Card Details</h1>
+
+    <div>
+        <h4>Card</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.CardName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.CardName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.CardSet)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.CardSet)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.CardType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.CardType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.CardColor)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.CardColor)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.CardCost)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.CardCost)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.CardSetID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.CardSetID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.DeckID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.Decks.DeckName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Card.Wishlists)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Card.Wishlists.WishlistName)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Card?.CardID" class="custom-link">Edit</a> |
+        <a asp-page="./Index" class="custom-link">Back to List</a>
+    </div>
+</div>

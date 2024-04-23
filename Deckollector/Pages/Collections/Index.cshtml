@@ -1,0 +1,71 @@
+﻿@page
+@model Deckollector.Pages.Collections.IndexModel
+
+@{
+    ViewData["Title"] = "Collections";
+}
+
+<div class="wrapper">
+    <h1>Collections</h1>
+
+    <p>
+        <a asp-page="Create" class="custom-link">Create New</a>
+    </p>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Collection[0].CollectionName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Collection[0].CollectionDescription)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Collection) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollectionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollectionDescription)
+                </td>
+                <td>
+                        <a asp-page="./Index" asp-route-id="@item.CollectionID" class="custom-link">Select</a> |
+                        <a asp-page="./Edit" asp-route-id="@item.CollectionID" class="custom-link">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.CollectionID" class="custom-link">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.CollectionID" class="custom-link">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.CollectionData.Decks != null && Model.CollectionID != 0)
+    {
+        <h3>Decks In Selected Collection</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Deck Name</th>
+                    <th>Deck Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CollectionData.Decks)
+                {
+                    <tr>
+                        <td>
+                            @item.DeckName
+                        </td>
+                        <td>
+                            @item.DeckDescription
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

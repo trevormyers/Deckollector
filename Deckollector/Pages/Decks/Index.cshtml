@@ -1,0 +1,89 @@
+﻿@page
+@model Deckollector.Pages.Decks.IndexModel
+
+@{
+    ViewData["Title"] = "Decks";
+}
+
+<div class="wrapper">
+    <h1>Decks</h1>
+
+    <p>
+        <a asp-page="Create" class="custom-link">Create New</a>
+    </p>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deck[0].DeckName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deck[0].DeckDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deck[0].Collection)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Deck) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeckName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeckDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Collection.CollectionName)
+                </td>
+                <td>
+                        <a asp-page="./Index" asp-route-id="@item.DeckID" class="custom-link">Select</a>|
+                        <a asp-page="./Edit" asp-route-id="@item.DeckID" class="custom-link">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.DeckID" class="custom-link">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.DeckID" class="custom-link">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.DeckData.Cards != null && Model.DeckID != 0)
+    {
+        <h3>Cards In Selected Deck</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Card Name</th>
+                <th>Card Type</th>
+                <th>Card Color</th>
+                <th>Card Cost</th>
+                <th>Card Set</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.DeckData.Cards)
+            {
+                <tr>
+                    <td>
+                        @item.CardName
+                    </td>
+                    <td>
+                        @item.CardType
+                    </td>
+                    <td>
+                        @item.CardColor
+                    </td>
+                    <td>
+                        @item.CardCost
+                    </td>
+                    <td>
+                        @item.CardSet
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

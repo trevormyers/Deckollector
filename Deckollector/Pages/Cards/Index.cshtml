@@ -1,0 +1,135 @@
+﻿@page
+@model Deckollector.Pages.Cards.IndexModel
+
+@{
+    ViewData["Title"] = "Cards";
+}
+
+<div class="wrapper">
+    <h1>Cards</h1>
+
+    <p>
+        <a asp-page="Create" class="custom-link">Create New</a>
+    </p>
+    <form method="get">
+        <div class="form-group">
+            <label for="filter">Filter by:</label>
+            <select id="filter" name="filter" class="form-control">
+                <option value="CardType">Card Type</option>
+                <option value="CardColor">Card Color</option>
+                <option value="CardName">Card Name</option>
+                <option value="CardCost">Card Cost</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="search">Search:</label>
+            <input type="text" id="search" name="search" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CardSelect.DeckID" class="control-label">Select Deck:</label>
+            <select asp-for="DeckFilter" class="form-control" asp-items="@Model.DeckNameSL">
+                <option value="">Select Deck</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Apply Filter</button>
+    </form>
+
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].CardName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].CardSet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].CardType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].CardColor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].CardCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].CardSetID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].Decks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card[0].Wishlists)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Card) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardSet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardColor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardSetID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Decks.DeckName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wishlists.WishlistName)
+                </td>
+                <td>
+                        <a asp-page="./Edit" asp-route-id="@item.CardID" class="custom-link">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.CardID" class="custom-link">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.CardID" class="custom-link">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function applyFilter() {
+        var filterBy = document.getElementById("filter").value;
+        var searchQuery = document.getElementById("search").value.toLowerCase();
+
+        var tableRows = document.querySelectorAll('.table tbody tr');
+
+        tableRows.forEach(function (row) {
+            var cellValue = row.querySelector('td:nth-child(' + (getHeaderIndex(filterBy) + 1) + ')').textContent.toLowerCase();
+
+            if (cellValue.includes(searchQuery)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    function getHeaderIndex(headerName) {
+        var headers = document.querySelectorAll('.table th');
+        for (var i = 0; i < headers.length; i++) {
+            if (headers[i].textContent.trim() === headerName) {
+                return i;
+            }
+        }
+        return -1;
+    }
+</script>

@@ -1,0 +1,77 @@
+﻿@page
+@model Deckollector.Pages.Cards.CreateModel
+
+@{
+    ViewData["Title"] = "Create Card";
+}
+
+<div class="wrapper">
+    <h1>Create Card</h1>
+
+    <h4>Card</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Card.CardName" class="control-label"></label>
+                    <input asp-for="Card.CardName" class="form-control" />
+                    <span asp-validation-for="Card.CardName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.CardSet" class="control-label"></label>
+                    <input asp-for="Card.CardSet" class="form-control" />
+                    <span asp-validation-for="Card.CardSet" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.CardType" class="control-label"></label>
+                    <input asp-for="Card.CardType" class="form-control" />
+                    <span asp-validation-for="Card.CardType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.CardColor" class="control-label"></label>
+                    <input asp-for="Card.CardColor" class="form-control" />
+                    <span asp-validation-for="Card.CardColor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.CardCost" class="control-label"></label>
+                    <input asp-for="Card.CardCost" class="form-control" />
+                    <span asp-validation-for="Card.CardCost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.CardSetID" class="control-label"></label>
+                    <input asp-for="Card.CardSetID" class="form-control" />
+                    <span asp-validation-for="Card.CardSetID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.Decks" class="control-label"></label>
+                    <select asp-for="Card.DeckID" class="form-control"
+                            asp-items="@Model.DeckNameSL">
+                        <option value="">Select Deck</option>
+                    </select>
+                    <span asp-validation-for="Card.DeckID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Card.Wishlists" class="control-label"></label>
+                    <select asp-for="Card.WishlistID" class="form-control"
+                            asp-items="@Model.WishlistNameSL">
+                        <option value="">Select Wishlist</option>
+                        <option value="">None</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="Index" class="custom-link">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

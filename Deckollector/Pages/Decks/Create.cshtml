@@ -1,0 +1,48 @@
+﻿@page
+@model Deckollector.Pages.Decks.CreateModel
+
+@{
+    ViewData["Title"] = "Create Deck";
+}
+
+<div class="wrapper">
+    <h1>Create Deck</h1>
+
+    <h4>Deck</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Deck.DeckName" class="control-label"></label>
+                    <input asp-for="Deck.DeckName" class="form-control" />
+                    <span asp-validation-for="Deck.DeckName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Deck.DeckDescription" class="control-label"></label>
+                    <input asp-for="Deck.DeckDescription" class="form-control" />
+                    <span asp-validation-for="Deck.DeckDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Deck.Collection" class="control-label"></label>
+                    <select asp-for="Deck.CollectionID" class="form-control"
+                            asp-items="@Model.CollectionNameSL">
+                        <option value="">Select Collection</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="Index" class="custom-link">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

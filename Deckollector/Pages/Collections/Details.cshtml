@@ -1,0 +1,33 @@
+﻿@page
+@model Deckollector.Pages.Collections.DetailsModel
+
+@{
+    ViewData["Title"] = "Collection Details";
+}
+
+<div class="wrapper">
+    <h1>Collection Details</h1>
+
+    <div>
+        <h4>Collection</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Collection.CollectionName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Collection.CollectionName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Collection.CollectionDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Collection.CollectionDescription)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Collection?.CollectionID" class="custom-link">Edit</a> |
+        <a asp-page="./Index" class="custom-link">Back to List</a>
+    </div>
+</div>

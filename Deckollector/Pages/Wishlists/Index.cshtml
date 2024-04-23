@@ -1,0 +1,75 @@
+﻿@page
+@model Deckollector.Pages.Wishlists.IndexModel
+
+@{
+    ViewData["Title"] = "Wishlists";
+}
+
+<div class="wrapper">
+    <h1>Wishlists</h1>
+
+    <p>
+        <a asp-page="Create" class="custom-link">Create New</a>
+    </p>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Wishlist[0].WishlistName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Wishlist[0].WishlistDescription)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Wishlist) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WishlistName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WishlistDescription)
+                </td>
+                <td>
+                        <a asp-page="./Index" asp-route-id="@item.WishlistID" class="custom-link">Select</a>|
+                        <a asp-page="./Edit" asp-route-id="@item.WishlistID" class="custom-link">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.WishlistID" class="custom-link">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.WishlistID" class="custom-link">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.WishlistData.Cards != null && Model.WishlistID != 0)
+    {
+        <h3>Cards In Selected Wishlist</h3>
+        <table class="table text-light">
+            <thead>
+                <tr>
+                    <th>Card Name</th>
+                    <th>Card Set</th>
+                    <th>Card Set ID</th>
+                </tr>
+            </thead>            
+            <tbody>
+                @foreach (var item in Model.WishlistData.Cards)
+                {
+                    <tr>
+                        <td>
+                            @item.CardName
+                        </td>
+                        <td>
+                            @item.CardSet
+                        </td>
+                        <td>
+                            @item.CardSetID
+                        </td>
+                    </tr>
+                }
+            </tbody>            
+        </table>
+    }
+</div>
